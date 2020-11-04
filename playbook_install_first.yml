@@ -1,0 +1,8 @@
+---
+- hosts: all 
+  become: yes
+
+  tasks:
+  - name: Insatll mc, git, dig, whois, curl, tree 
+    apt: name={{ item  }} update_cache=yes state=latest
+    loop: [ 'mc', 'whois', 'git', 'curl', 'tree', 'dnsutils' ]

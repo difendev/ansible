@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu 
+  become: yes
+
+  tasks:
+  - name: Insatll Apache, Mysql, PHP
+    apt: name={{ item  }} update_cache=yes state=latest
+    loop: [ 'apache2', 'mysql-server', 'python3-pymysql', 'php', 'php-mysql', 'libapache2-mod-php' ]
+
+  - name: Start Apache and MYSQL
+    service: name={{ item }} state=started enabled=yes
+    loop: [ 'apache2', 'mysql' ]
